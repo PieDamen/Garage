@@ -1,0 +1,44 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar-inverse navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/garage">Garage</a>
+      <a class="navbar-brand" href="/logs">Logs</a>
+    </div>
+
+
+      </div>
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+      <iframe width="1280" height="720"
+src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+      <div class="caption">
+          <div class="col-sm-8 col-md-10 col-md-offset-1">
+            <h3 align="center">Bediening Garage</h3>
+            <p align="center"><a href="#" class="btn btn-success btn-lg" role="button">Open</a> <a href="#" class="btn btn-danger btn-lg" role="button">Sluit</a></p>
+          </div>
+      </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+{% endblock %}
