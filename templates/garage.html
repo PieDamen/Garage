@@ -24,17 +24,28 @@
 
 {% block content %}
 
+<div class="page-header">
 <div class="container">
-      <iframe width="1280" height="720"
-src="https://www.youtube.com/embed/tgbNymZ7vqY">
-</iframe>
-      <div class="caption">
-          <div class="col-sm-8 col-md-10 col-md-offset-1">
-            <h3 align="center">Bediening Garage</h3>
-            <p align="center"><a href="#" class="btn btn-success btn-lg" role="button">Open</a> <a href="#" class="btn btn-danger btn-lg" role="button">Sluit</a></p>
-          </div>
-      </div>
+  <div class="row">
+    <div class=""col-md-2 col-md-offset-5"">
+  <h1>Bediening Garage</h1>
 </div>
+</div>
+</div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class=""col-md-2 col-md-offset-5"">
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="{{ url_for('main.video_feed') }}"></iframe>
+</div>
+<a href="{{ url_for('main.exec') }}" class="btn btn-success btn-lg btn-block" id="garage">Garage openen</a>
+<a href="{{ url_for('main.exec') }}" class="btn btn-danger btn-lg btn-block" id="garage">Garage Sluiten</a>
+    </div>
+    </div>
+</div>
+
 
 
 {% endblock %}

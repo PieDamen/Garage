@@ -2,6 +2,7 @@ from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import cv2
 
 db = SQLAlchemy()
 
@@ -33,3 +34,14 @@ def create_app():
 
     return app
 
+def gen():
+    camera = cv2.VideoCapture(0)
+
+    while True:
+        ret, img = camera.read()
+
+        if ret:
+            frame = cv2.imencode('.jpg', img)[1].tobytes()
+            yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        else:
+            break
