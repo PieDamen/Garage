@@ -1,6 +1,6 @@
-@app.route('/<users>/<password>')
-def index(users, password):
-    user =User(users=users, password=password)
-    db.session.ad(user)
+@auth.route('/<user>/<password>')
+def index(user, password):
+    user = User(user=user, password=generate_password_hash(password, method='sha256'))
+    db.session.add(user)
     db.session.commit()
     return '<h1> Added new user </h1>'
