@@ -30,4 +30,4 @@ def exec():
     subprocess.Popen(['python', '/home/pi/GarageDeur/RelaySwitch.py'])
     return render_template('garage.html')
 
-#test
+
