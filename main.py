@@ -16,6 +16,7 @@ def garage():
 @login_required
 def logs():
     return render_template("logs.html")
+    return app.send_static_file('log.txt')
 
 
 @main.route('/video_feed')
