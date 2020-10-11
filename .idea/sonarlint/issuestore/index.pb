@@ -19,3 +19,9 @@ E
 templates/garage.html,d/e/de6f4765f4166f5ce1e835a5b222e356079d0da9
 >
 RelaySwitch.py,b/2/b2f0d65a95f608fae4377b67a77d7d3728764da5
+G
+Scripts /RelaySwitch.py,e/3/e362dcd8a359ccca3dd61aa1ff52b0899677c5a2
+6
+log.py,3/b/3be7c00e90f43c8d567bfcac748db6ee686855b8
+D
+Scripts /ReedTest.py,3/1/3140f7fef699ad69784c33515a234e12d29c63cf
