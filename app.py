@@ -22,6 +22,7 @@ def login():
         return render_template('/login.html')
 
 
+
 @app.route("/garage")
 def garage():
     return render_template("garage.html")
