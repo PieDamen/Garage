@@ -5,6 +5,7 @@ import subprocess
 
 main = Blueprint('main', __name__)
 
+
 @main.route("/garage")
 @login_required
 def garage():
@@ -22,8 +23,9 @@ def logs():
 def video_feed():
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
 @main.route('/exec')
 @login_required
 def exec():
-    subprocess.Popen(['python', '/home/pi/Desktop/GarageDeur/Scripts/RelaySwitch.py'])
+    subprocess.Popen(['python', '/home/pi/GarageDeur/RelaySwitch.py'])
     return render_template('garage.html')
