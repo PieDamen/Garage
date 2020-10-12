@@ -11,10 +11,10 @@ print(datetime.now().strftime("     Program Starting -- %Y/%m/%d -- %H:%M  -- He
 
 print " Control + C to exit Program"
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 time.sleep(1)
 
