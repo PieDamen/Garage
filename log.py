@@ -9,7 +9,7 @@ logfile.write(datetime.now().strftime("     Program Starting -- %Y/%m/%d -- %H:%
 logfile.close()
 print(datetime.now().strftime("     Program Starting -- %Y/%m/%d -- %H:%M  -- Hello! \n"))
 
-print " Control + C to exit Program"
+print(" Control + C to exit Program")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
