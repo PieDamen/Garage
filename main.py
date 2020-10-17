@@ -28,7 +28,7 @@ def video_feed():
 @main.route('/exec')
 @login_required
 def exec():
-    subprocess.Popen(['python', '/home/pi/GarageDeur/RelaySwitch.py'])
+    subprocess.Popen(['python', '/home/pi/GarageDeur/Scripts/RelaySwitch.py'])
     return render_template('garage.html')
 
 

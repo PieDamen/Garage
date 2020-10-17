@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 # Open logfile | write start date & time of the program.
-LogFile = open("/home/pi/GarageDeur/static/log.txt", "a")
+LogFile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
 LogFile.write(datetime.now().strftime("--- Program Starting -- %d/%m/%Y -- %H:%M ---"))
 LogFile.close()
 
@@ -38,7 +38,7 @@ try:
 
 
         if GPIO.input(SensorTop) == GPIO.LOW and GPIO.input(SensorBottom) == GPIO.LOW:
-            logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
+            logfile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
             logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Opening/Closing \n"))
             logfile.close()
             while GPIO.input(SensorTop) == GPIO.HIGH and GPIO.input == GPIO.HIGH:
@@ -46,21 +46,21 @@ try:
 
             # Door is closed
         if GPIO.input(SensorBottom) == GPIO.HIGH:
-            logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
+            logfile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
             logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Closed \n"))
             logfile.close()
             DoorOpenTimer = 0
 
             # Door is Open
         if GPIO.input(SensorTop) == GPIO.HIGH:
-            logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
+            logfile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
             logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Open \n"))
             logfile.close()
             DoorOpenTimer = 1
             DoorOpenflag = 0
 
 except KeyboardInterrupt:
-    LogFile = open("/home/pi/GarageDeur/static/log.txt", "a")
+    LogFile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
     LogFile.write(datetime.now().strftime("--- Program Closed -- %d/%m/%Y -- %H:%M ---"))
     LogFile.close()
 
