@@ -2,77 +2,79 @@ import os
 import RPi.GPIO as GPIO
 import time
 from datetime import datetime
+import sys
+import signal
 
-loglocation = "/home/pi/GarageDeur/log.txt"
-logfile = open(loglocation, "a")
-logfile.write(datetime.now().strftime(
-    "     Program Starting -- %Y/%m/%d -- %H:%M  -- Hello! \n"))
-logfile.close()
-print(datetime.now().strftime(
-    "     Program Starting -- %Y/%m/%d -- %H:%M  -- Hello! \n"))
+# Open logfile | write start date & time of the program.
+LogFile = open("/home/pi/GarageDeur/Static/log.txt", "a")
+LogFile.write(datetime.now().strftime("--- Program Starting -- %d/%m/%Y -- %H:%M ---"))
+LogFile.close()
 
-print(" Control + C to exit Program")
-
+# Setup GPIO pins and configuration | wait a second after initialization
 GPIO.setmode(GPIO.BCM)
+SensorBottom = 18
+SensorTop = 24
 GPIO.setwarnings(False)
-
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(SensorBottom, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(SensorTop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 time.sleep(1)
 
-TimeDoorOpened = datetime.strptime(datetime.strftime(
-    datetime.now(), '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')  # Default Time
-DoorOpenTimer = 0  # Default start status turns timer off
-DoorOpenTimerMessageSent = 1  # Turn off messages until timer is started
+# Default time
+TimeDoorOpened = datetime.strptime(datetime.strftime(datetime.now(), '%d-%m-%Y %H:%M:%S'), '%d-%m-%Y %H:%M:%S')
+# Default start status turns timer off
+DoorOpenTimer = 0
+# Flag door open to start timer when door is open
+DoorOpenflag = 1
 
 try:
-    while 1 >= 0:
+    while True:
         time.sleep(1)
-        if DoorOpenTimer == 1:  # Door Open Timer has Started
-            currentTimeDate = datetime.strptime(datetime.strftime(
-                datetime.now(), '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')
-            if (currentTimeDate - TimeDoorOpened).seconds > 900 and DoorOpenTimerMessageSent == 0:
-                print("Your Garage Door has been Open for 15 minutes")
-                DoorOpenTimerMessageSent = 1
+        # Garage door open more than 15 minutes, send warning.... || LOOP NEEDS WORK
+        if DoorOpenTimer == 1:
+            currentTimeDate = datetime.strptime(datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')
+            if (currentTimeDate - TimeDoorOpened).seconds > 900 and DoorOpenflag == 0:
+                # Work on warning here | Email?
+                DoorOpenFlag = 1 # work on this too, stop timer?
 
-        if GPIO.input(24) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:  # Door Status is Unknown
-            logfile = open(loglocation, "a")
-            logfile.write(datetime.now().strftime(
-                "%Y/%m/%d -- %H:%M:%S  -- Door Opening/Closing \n"))
+        if GPIO.input(SensorTop) == GPIO.LOW and GPIO.input(SensorBottom) == GPIO.LOW:
+            logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
+            logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Opening/Closing \n"))
             logfile.close()
-            print(datetime.now().strftime(
-                "%Y/%m/%d -- %H:%M:%S  -- Door Opening/Closing \n"))
-            while GPIO.input(24) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
-                time.sleep(.5)
-            else:
-                if GPIO.input(24) == GPIO.LOW:  # Door is Closed
-                    logfile = open(loglocation, "a")
-                    logfile.write(datetime.now().strftime(
-                        "%Y/%m/%d -- %H:%M:%S  -- Door Closed \n"))
-                    logfile.close()
-                    print(datetime.now().strftime(
-                        "%Y/%m/%d -- %H:%M:%S  -- Door Closed"))
-                    DoorOpenTimer = 0
+            while GPIO.input(SensorTop) == GPIO.HIGH and GPIO.input == GPIO.HIGH:
+                time.sleep(0.5)
 
-                if GPIO.input(18) == GPIO.LOW:  # Door is Open
-                    logfile = open(loglocation, "a")
-                    logfile.write(datetime.now().strftime(
-                        "%Y/%m/%d -- %H:%M:%S  -- Door Open \n"))
-                    logfile.close()
-                    print(datetime.now().strftime(
-                        "%Y/%m/%d -- %H:%M:%S  -- Door Open"))
-                    # Start Door Open Timer
-                    TimeDoorOpened = datetime.strptime(datetime.strftime(
-                        datetime.now(), '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')
-                    DoorOpenTimer = 1
-                    DoorOpenTimerMessageSent = 0
+            # Door is closed
+        if GPIO.input(SensorBottom) == GPIO.HIGH:
+            logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
+            logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Closed \n"))
+            logfile.close()
+            DoorOpenTimer = 0
 
+            # Door is Open
+        if GPIO.input(SensorTop) == GPIO.HIGH:
+            logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
+            logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Open \n"))
+            logfile.close()
+            DoorOpenTimer = 1
+            DoorOpenflag = 0
 
 except KeyboardInterrupt:
-    logfile = open(loglocation, "a")
-    logfile.write(datetime.now().strftime(
-        "     Log Program Shutdown -- %Y/%m/%d -- %H:%M  -- Goodbye! \n"))
-    logfile.close()
-    print(datetime.now().strftime(
-        "     Log Program Shutdown -- %Y/%m/%d -- %H:%M  -- Goodbye! \n"))
-    GPIO.cleanup()
+    LogFile = open("/home/pi/GarageDeur/Static/log.txt", "a")
+    LogFile.write(datetime.now().strftime("--- Program Closed -- %d/%m/%Y -- %H:%M ---"))
+    LogFile.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
