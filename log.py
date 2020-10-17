@@ -1,12 +1,11 @@
-import os
+
 import RPi.GPIO as GPIO
 import time
 from datetime import datetime
-import sys
-import signal
+
 
 # Open logfile | write start date & time of the program.
-LogFile = open("/home/pi/GarageDeur/Static/log.txt", "a")
+LogFile = open("/home/pi/GarageDeur/static/log.txt", "a")
 LogFile.write(datetime.now().strftime("--- Program Starting -- %d/%m/%Y -- %H:%M ---"))
 LogFile.close()
 
@@ -33,8 +32,10 @@ try:
         if DoorOpenTimer == 1:
             currentTimeDate = datetime.strptime(datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')
             if (currentTimeDate - TimeDoorOpened).seconds > 900 and DoorOpenflag == 0:
-                # Work on warning here | Email?
-                DoorOpenFlag = 1 # work on this too, stop timer?
+                # Work on warning here | Email? | warning is looping
+
+                DoorOpenFlag = 1  # work on this too, stop timer?
+
 
         if GPIO.input(SensorTop) == GPIO.LOW and GPIO.input(SensorBottom) == GPIO.LOW:
             logfile = open("/home/pi/GarageDeur/static/log.txt", "a")
@@ -59,7 +60,7 @@ try:
             DoorOpenflag = 0
 
 except KeyboardInterrupt:
-    LogFile = open("/home/pi/GarageDeur/Static/log.txt", "a")
+    LogFile = open("/home/pi/GarageDeur/static/log.txt", "a")
     LogFile.write(datetime.now().strftime("--- Program Closed -- %d/%m/%Y -- %H:%M ---"))
     LogFile.close()
 
