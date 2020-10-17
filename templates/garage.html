@@ -1,56 +1,31 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}{% endblock %}
-
-{% block navbar %}
-    <nav class="navbar-inverse navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ url_for('main.garage') }}">Garage</a>
-      <a class="navbar-brand" href="{{ url_for('main.logs') }}">Logs</a>
-      <a class="navbar-brand" href="{{ url_for('auth.logout') }}">Logout</a>
-    </div>
+{% extends "base.html" %}
+{% block title %}Garage{% endblock %}
 
 
-      </div>
-    </nav>
-{% endblock %}
-
-
-{% block content %}
+{% block body %}
 
 <div class="page-header">
-<div class="container">
-  <div class="row">
-    <div class=""col-md-2 col-md-offset-5"">
-  <h1>Bediening Garage</h1>
-</div>
-</div>
-</div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-2 col-md-offset-5">
-<div class="embed-responsive embed-responsive-16by9">
-    <iframe class="embed-responsive-item" src="{{ url_for('main.video_feed') }}"></iframe>
-</div>
-<a href="{{ url_for('main.exec') }}" class="btn btn-success btn-lg btn-block" id="garage">Garage openen</a>
-<a href="{{ url_for('main.exec') }}" class="btn btn-danger btn-lg btn-block" id="garage">Garage Sluiten</a>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <h1>Bediening Garage</h1>
+            </div>
+        </div>
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="{{ url_for('main.video_feed') }}"></iframe>
+            </div>
+            <a href="{{ url_for('main.exec') }}" class="btn btn-success btn-lg btn-block" id="garage">Garage openen</a>
+            <a href="{{ url_for('main.exec') }}" class="btn btn-danger btn-lg btn-block" id="garage">Garage Sluiten</a>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-
-{% endblock %}

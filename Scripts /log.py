@@ -1,8 +1,6 @@
-
 import RPi.GPIO as GPIO
 import time
 from datetime import datetime
-
 
 # Open logfile | write start date & time of the program.
 LogFile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
@@ -35,7 +33,7 @@ while True:
             # Work on warning here | Email? | warning is looping, only want it to happen once
             DoorOpenFlag = 1  # work on this too, stop timer?
 
-        # Door status is unknown
+        # Door status is unknown | log colour orange
     if GPIO.input(SensorTop) == GPIO.LOW and GPIO.input(SensorBottom) == GPIO.LOW:
         logfile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
         logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Opening/Closing \n"))
@@ -43,14 +41,14 @@ while True:
         while GPIO.input(SensorTop) == GPIO.HIGH and GPIO.input == GPIO.HIGH:
             time.sleep(0.5)
 
-        # Door is closed
+        # Door is closed | log colour green
     if GPIO.input(SensorBottom) == GPIO.HIGH:
         logfile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
         logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Closed \n"))
         logfile.close()
         DoorOpenTimer = 0
 
-        # Door is Open
+        # Door is Open | log colour red
     if GPIO.input(SensorTop) == GPIO.HIGH:
         logfile = open("/home/pi/GarageDeur/Logs/log.txt", "a")
         logfile.write(datetime.now().strftime("%d/%m/%Y -- %H:%M:%S  -- Door Open \n"))

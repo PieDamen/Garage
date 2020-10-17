@@ -1,46 +1,29 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}{% endblock %}
-
-{% block navbar %}
-    <nav class="navbar-inverse navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
 
 
-      </div>
-    </nav>
-{% endblock %}
-
-
-{% block content %}
+{% block body %}
 <div class="container">
     <div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4">
-      <h1 class="text-center login-title">Log in om verder te gaan naar je garage bediening</h1>
-      <br>
-      <form action="/login" method="POST">
-        <input type="text" placeholder="Username" class="form-control" name="username" value="{{
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Log in om verder te gaan naar je garage bediening</h1>
+            <br>
+            <form action="/login" method="POST">
+                <input type="text" placeholder="Username" class="form-control" name="username" value="{{
           request.form.username }}">
-         <input type="password" class="form-control" placeholder="Password" name="password" value="{{
+                <input type="password" class="form-control" placeholder="Password" name="password" value="{{
           request.form.password }}">
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-        <label class="checkbox pull-left">
-<input type="checkbox" value="remember">
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+            </form>
+            {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}
+                {% endif %}
+                <label class="checkbox pull-left">
+                    <input type="checkbox" value="remember">
                     Remember me
-</label>
+                </label>
+        </div>
     </div>
-</div>
 </div>
 
 {% endblock %}

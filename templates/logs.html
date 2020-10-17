@@ -1,32 +1,9 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}{% endblock %}
-
-{% block navbar %}
-    <nav class="navbar-inverse navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ url_for('main.garage') }}">Garage</a>
-      <a class="navbar-brand" href="{{ url_for('main.logs') }}">Logs</a>
-      <a class="navbar-brand" href="{{ url_for('auth.logout') }}">Logout</a>
-    </div>
+{% extends "base.html" %}
+{% block title %}Logs{% endblock %}
 
 
-      </div>
-    </nav>
-{% endblock %}
 
-
-{% block content %}
+{% block body %}
 
 {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-
-{% endblock %}
